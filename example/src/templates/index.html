@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title></title>
+
+        <!--<link rel="stylesheet" href="css/main.css">-->
+
+        <script type="text/sv-template" id="/test.html">
+            Content of the template.
+        </script>
+        <style>
+            .active {
+                color: green;
+            }
+        </style>
+    </head>
+    <body sv-controller = "Main as main">
+        <br><br>
+        <div class="row">
+            <div class="col-xs-6 col-xs-offset-3">
+                <h3> SavaJS examples: </h3>
+                <h4> sv-repeat (collection): </h4>
+                <ul class="list-group">
+                    <li class="list-group-item" sv-repeat = "(key, obj) in main.collection">
+                        {{$index+1}}. [{{key}}] {{obj.field}}
+                    </li>
+                </ul>
+
+                <h4> sv-repeat (array with track by): </h4>
+                <ul class="list-group">
+                    <li class="list-group-item" sv-repeat = "(key, obj) in main.array track by obj.field">
+                        {{$index + 1}}. [{{key}}] {{obj.field}}
+                    </li>
+                </ul>
+
+                <h4> interpolate: </h4>
+                <p>data-binding example <strong>{{main.collection.key1.field}}</strong> to string</p>
+                <br>
+
+                <h4> sv-model: </h4>
+                <div class="input-group">
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="sv-model example"
+                        sv-model = "main.collection.key1.field"
+                    >
+                </div>
+
+                <h4> sv-show: </h4>
+                <div class="input-group">
+                    <span class="input-group-addon">sv-show</span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="type something"
+                        sv-model = "main.isShow"
+                    >
+                </div>
+                <div sv-show = "!!main.isShow">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                </div>
+
+                <h4> sv-style: </h4>
+                <div class="input-group">
+                    <span class="input-group-addon">sv-style (background-color)</span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="type red"
+                        sv-model = "main.style"
+                    >
+                </div>
+                <div sv-style = "{'background-color': main.style}">
+                    Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+                </div>
+
+                <h4> sv-class: </h4>
+                <div class="input-group">
+                    <span class="input-group-addon">sv-class</span>
+                    <input
+                        type="text"
+                        class="form-control"
+                        placeholder="type something"
+                        sv-model = "main.className"
+                    >
+                </div>
+
+                <div sv-class = "{active: !!main.className}">
+                    Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur
+                </div>
+
+                <h4> sv-click: </h4>
+                <button class="btn btn-primary" type="button"  sv-click = "main.callback($event)">
+                    Button
+                </button>
+            </div>
+        </div>
+        <br><br> <br><br> <br><br>
+    </body>
+    <script src="js/bundle.js"></script>
+</html>
